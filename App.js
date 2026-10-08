@@ -22,14 +22,14 @@ export default function App() {
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="light-content" backgroundColor="#000000" />
       
-      {/* Top App Bar / Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>My Profile</Text>
-      </View>
+      <View style={styles.rootWrapper}>
+        <View style={styles.container}>
+          {/* Top App Bar / Header */}
+          <View style={styles.header}>
+            <Text style={styles.headerTitle}>My Profile</Text>
+          </View>
 
-      {/* Main Content */}
-      <View style={styles.container}>
-        {/* Profile Avatar Section */}
+          {/* Profile Avatar Section */}
         <View style={styles.avatarSection}>
           <View style={styles.avatarContainer}>
             <Image
@@ -80,6 +80,7 @@ export default function App() {
         >
           <Ionicons name="add" size={28} color="#FFFFFF" />
         </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -91,13 +92,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
+  rootWrapper: {
+    flex: 1,
+    backgroundColor: Platform.OS === 'web' ? '#E9ECEF' : '#F5F5F5',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   header: {
     height: 58,
     backgroundColor: '#000000',
     justifyContent: 'center',
     alignItems: 'center',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#222222',
+    width: '100%',
   },
   headerTitle: {
     color: '#FFFFFF',
@@ -108,7 +114,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5F5F5',
+    width: '100%',
+    maxWidth: 440,
     position: 'relative',
+    ...(Platform.OS === 'web'
+      ? {
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 6 },
+          shadowOpacity: 0.15,
+          shadowRadius: 16,
+        }
+      : {}),
   },
   avatarSection: {
     alignItems: 'center',
